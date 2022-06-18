@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -8,7 +9,6 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "moe.xing.mvp_utils"
         minSdk 26
         targetSdk 32
         versionCode 1
@@ -29,6 +29,21 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    publishing {
+        multipleVariants {
+            allVariants()
+            withJavadocs()
+        }
+        publications {
+            maven(MavenPublication) {
+                groupId = 'moe.xing'
+                artifactId = 'mvp_utils_NG'
+                version = '1.0'
+
+                from components.java
+            }
+        }
     }
 }
 
